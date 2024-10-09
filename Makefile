@@ -73,12 +73,16 @@ cluster: ## Create a kind cluster
 
 .PHONY: deploy-strimzi
 deploy-strimzi: ## Deploy Kafka Operator on the kind cluster
-	kubectl apply -f ./config/kafka/strimzi-ns.yaml
-	kubectl apply -f 'https://strimzi.io/install/latest?namespace=strimzi' -n strimzi
-	kubectl get pod -n strimzi --watch
+	kubectl apply -f ./config/kafka/kafka-ns.yaml
+	kubectl apply -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+	@echo -ne "Watch result through this command:\n"
+	@echo -ne "kubectl get pod -n kafka -w\n"
 
 .PHONY: deploy-kafka
 deploy-kafka: ## Deploy Kafka on the kind cluster
 	kubectl apply -f ./config/kafka/kafka-ns.yaml
 	kubectl apply -f ./config/kafka/cluster.yaml -n kafka
-	kubectl get pod -n kafka --watch
+	@echo -ne "Watch result through this command:\n"
+	@echo -ne "kubectl get pod -n kafka -w\n"
+
+
