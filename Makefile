@@ -65,6 +65,12 @@ lint-fix: golangci-lint ## Run golangci-lint linter and perform fixes
 git-template: ## Add commit template setting to local git config
 	git config --local commit.template ./.github/commit-template.txt
 
+##@ Build
+
+.PHONY: build
+build: ## Build the binary.
+	go build -o ./bin/kkaf .
+
 ##@ Utilities
 
 .PHONY: cluster
